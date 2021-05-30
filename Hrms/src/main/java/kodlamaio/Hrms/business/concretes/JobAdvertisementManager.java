@@ -24,9 +24,9 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     @Override
     public DataResult<List<JobAdvertisement>> getJobAdvertisement() {
         if ((long) this.jobAdvertsDao.findAll().size() > 0) {
-            return new SuccessDataResult<>(this.jobAdvertsDao.findAll(), "Success: Tüm iş ilanları listelendi.");
+            return new SuccessDataResult<>(this.jobAdvertsDao.findAll(), "Başarılı : Tüm İş İlanları Listelenmiştir.");
         }
-        return new WarningDataResult<>(this.jobAdvertsDao.findAll(), "Warning: Herhangi bir iş ilanı bulunamadı!");
+        return new WarningDataResult<>(this.jobAdvertsDao.findAll(), "Hata : Herhangi Bir İş İlanı Bulunamamıştır!");
     }
 
     @Override
@@ -34,23 +34,23 @@ public class JobAdvertisementManager implements JobAdvertisementService {
         if ((long) this.jobAdvertsDao.findAllByIsActiveTrue().size() > 0) {
             return new SuccessDataResult<>(
                     this.jobAdvertsDao.findAllByIsActiveTrue(),
-                    "Success: Aktif tüm iş ilanları listelendi!");
+                    "Başarılı : Aktif Tüm İş İlanları Listelenmiştir.");
         }
         return new WarningDataResult<>(
                 this.jobAdvertsDao.findAllByIsActiveTrue(),
-                "Warning: Aktif iş ilanı bulunamadı!");
+                "Hata : Aktif Bir İş İlanı Bulunamamıştır!");
     }
 
     @Override
     public DataResult<List<JobAdvertisement>> getActiveJobAdvertisementForEmployer(String companyName) {
         if ((long) this.jobAdvertsDao.getJobAdvertByIsActiveTrueAndEmployer_CompanyName(companyName).size() > 0) {
             return new SuccessDataResult<>(this.jobAdvertsDao.getJobAdvertByIsActiveTrueAndEmployer_CompanyName(
-                    companyName), "Success: Şirket'e ait tüm ilanlar listelendi!");
+                    companyName), "Başarılı : Şirket'e Ait Tüm İlanlar Listelenmiştir.");
         }
 
         return new WarningDataResult<>(
                 this.jobAdvertsDao.getJobAdvertByIsActiveTrueAndEmployer_CompanyName(companyName),
-                "Warning: Şirket'e ait herhangi bir ilan bulunamadı!");
+                "Hata : Şirket'e Ait Herhangi Bir İlan Bulunamamıştır!");
 
     }
 
@@ -60,23 +60,23 @@ public class JobAdvertisementManager implements JobAdvertisementService {
         if ((long) this.jobAdvertsDao.findAllByIsActiveTrue(sort).size() > 0) {
             return new SuccessDataResult<>(
                     this.jobAdvertsDao.findAllByIsActiveTrue(sort),
-                    "Success: Aktif tüm iş ilanları yayınlanma tarihine göre listelendi!");
+                    "Başarılı : Aktif Tüm İş İlanları Yayınlanma Tarihine Göre Listelenmiştir.");
         }
         return new WarningDataResult<>(
                 this.jobAdvertsDao.findAllByIsActiveTrue(sort),
-                "Warning: Aktif iş ilanı bulunamadı!");
+                "Hata : Aktif Şş İlanı Bulunamamıştır!");
     }
 
 
     @Override
     public Result deactiveJobAdvertisement(int jobAdvertId) {
         this.jobAdvertsDao.deactiveJobAdvert(jobAdvertId);
-        return new SuccessResult("Success: İlan başarıyla inaktif edildi!");
+        return new SuccessResult("Başarılı : İlan Başarıyla İnaktif Edilmiştir.");
     }
 
     @Override
     public Result addJobAdvert(JobAdvertisement jobAdvert) {
         this.jobAdvertsDao.save(jobAdvert);
-        return new SuccessResult("Success: İlan sisteme eklendi!");
+        return new SuccessResult("Başarılı : İlan Sisteme Eklenmiştir.");
     }
 }

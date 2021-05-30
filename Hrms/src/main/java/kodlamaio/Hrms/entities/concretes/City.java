@@ -1,15 +1,18 @@
 package kodlamaio.Hrms.entities.concretes;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = false)
 @Data
 @Entity
 @Table(name = "cities")
@@ -20,20 +23,15 @@ import java.util.List;
 public class City {
     @Id
     @NotNull
-    @Column(name = "city_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cityId;
+    private int id;
 
-    @Column(name = "city_name", nullable = false)
+    @Column(name = "city_name")
+    @NotNull
     private String cityName;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "city")
-    private List<JobAdvertisement> jobAdvertisements;
-
-    public City(String cityName) {
-        super();
-        this.cityName = cityName;
-    }
-
-
+    private List<JobAdvertisement> jobAdverts;
 }
